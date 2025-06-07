@@ -55,7 +55,7 @@ export function LoginForm({ className, ...props }) {
             <img
               src={Logo}
               alt="StudyHive logo"
-              className="background_color absolute inset-0 h-full w-full object-contain dark:brightness-[0.2] dark:grayscale"
+              className="background_color absolute inset-0 h-full w-full object-contain"
             />
           </div>
         </CardContent>
