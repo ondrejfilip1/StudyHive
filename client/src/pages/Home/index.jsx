@@ -3,10 +3,12 @@ import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import SplitText from "@/components/blocks/TextAnimations/SplitText/SplitText";
 import Logo from "@/assets/img/logo.svg";
+import Header from "@/components/header";
 
 export default function Home() {
   return (
     <>
+      <Header />
       <section className="py-32">
         <div className="container mx-auto">
           <div className="grid items-center gap-8 lg:grid-cols-2">
@@ -43,7 +45,11 @@ export default function Home() {
                 </Button>
               </div>
             </div>
-            <img className="max-h-96 w-full rounded-md object-contain" alt="logo" src={Logo} />
+            <img
+              className="max-h-96 w-full rounded-md object-contain"
+              alt="logo"
+              src={Logo}
+            />
           </div>
         </div>
       </section>

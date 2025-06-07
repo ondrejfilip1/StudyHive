@@ -3,17 +3,17 @@ import { Link } from "react-router-dom";
 import { ArrowDownToLine } from "lucide-react";
 import {
   Card,
-  CardAction,
-  CardContent,
   CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import Header from "@/components/header";
 
 export default function Download() {
   return (
     <>
+      <Header />
       <section className="py-32">
         <div className="container mx-auto">
           <div className="flex flex-col items-center justify-center text-center">

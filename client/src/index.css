@@ -141,3 +141,7 @@ h6,
 .manrope_font {
   font-family: "Manrope";
 }
+
+button {
+  cursor: pointer;
+}
