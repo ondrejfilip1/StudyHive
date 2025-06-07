@@ -13,7 +13,7 @@ export default function Home() {
             <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
               <SplitText
                 text="StudyHive"
-                className="my-6 text-5xl font-bold text-pretty lg:text-7xl manrope_font"
+                className="my-6 text-5xl font-bold text-pretty lg:text-7xl manrope_font tracking-tight"
                 delay={100}
                 duration={0.6}
                 ease="power3.out"
