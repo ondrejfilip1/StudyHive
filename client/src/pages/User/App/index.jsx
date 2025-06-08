@@ -4,6 +4,7 @@ import {
   SidebarInset,
 } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/app-sidebar";
+import ChatWindow from "./ChatWindow";
 
 export default function App() {
   return (
@@ -11,9 +12,9 @@ export default function App() {
       <SidebarProvider>
         <AppSidebar />
         <SidebarInset>
-          <div className="p-2">
+          <div className="p-2 relative h-full">
             <SidebarTrigger />
-
+            <ChatWindow />
           </div>
         </SidebarInset>
       </SidebarProvider>

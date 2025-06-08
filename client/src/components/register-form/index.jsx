@@ -44,7 +44,7 @@ export function RegisterForm({ className, ...props }) {
                 <Input
                   name="username"
                   id="username"
-                  type="string"
+                  type="text"
                   placeholder="Andrew"
                   required
                   onChange={handleChange}

@@ -3,10 +3,17 @@ const { isEmail } = require("validator");
 
 const schema = mongoose.Schema(
   {
-    username: { type: String, required: true, minlength: 1, maxlength: 64 },
+    username: {
+      type: String,
+      required: true,
+      unique: true,
+      minlength: 3,
+      maxlength: 64,
+    },
     email: {
       type: String,
       required: true,
+      unique: true,
       validate: [isEmail, "Invalid email"],
     },
     pfpUrl: { type: String, default: "" },

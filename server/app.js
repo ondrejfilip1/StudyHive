@@ -31,6 +31,28 @@ const io = new Server(server, {
 
 app.set("io", io);
 
+const activeUsers = new Set();
+
+io.on("connection", (socket) => {
+  console.log(`New connection from ${socket.handshake.address}`);
+
+  socket.on("add-user", (data) => {
+    socket.data.user = data;
+    activeUsers.add(socket.data.user);
+    console.log(activeUsers);
+    io.emit("add-user", [...activeUsers]);
+  });
+
+  socket.on("chat", (data) => {
+    const userMessage = {
+      user: socket.data.user,
+      message: data,
+      time: Date.now()
+    };
+    io.emit("chat", userMessage);
+  });
+});
+
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "jade");
