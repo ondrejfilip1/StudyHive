@@ -9,15 +9,15 @@ export default function Home() {
   return (
     <>
       <Header />
-      <section className="py-32">
-        <div className="container mx-auto">
+      <section className="py-32 min_h_screen_fixed flex items-center justify-center">
+        <div className="container px-4 mx-auto">
           <div className="grid items-center gap-8 lg:grid-cols-2">
             <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
               <SplitText
                 text="StudyHive"
                 className="my-6 text-5xl font-bold text-pretty lg:text-7xl manrope_font tracking-tight"
-                delay={100}
-                duration={0.6}
+                delay={80}
+                duration={0.4}
                 ease="power3.out"
                 splitType="chars"
                 from={{ opacity: 0, y: 40 }}

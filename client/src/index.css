@@ -145,3 +145,8 @@ h6,
 button {
   cursor: pointer;
 }
+
+/* Header height fix */
+.min_h_screen_fixed {
+  min-height: calc(100vh - 69px);
+}

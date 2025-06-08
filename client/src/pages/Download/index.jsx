@@ -15,7 +15,7 @@ export default function Download() {
     <>
       <Header />
       <section className="py-32">
-        <div className="container mx-auto">
+        <div className="container px-4 mx-auto">
           <div className="flex flex-col items-center justify-center text-center">
             <h1
               text="StudyHive"
@@ -56,7 +56,7 @@ export default function Download() {
                     />
                   </svg>
                   <CardTitle>Windows</CardTitle>
-                  <CardDescription>Windows 10, Windows 11</CardDescription>
+                  <CardDescription>Windows 8, 10, 11</CardDescription>
                 </CardHeader>
                 <CardFooter>
                   <Button>
