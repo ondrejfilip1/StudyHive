@@ -4,8 +4,10 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { SendHorizontal } from "lucide-react";
 import moment from "moment";
+import { SOCKET_IO_SERVER_URL } from "@/constants";
 
-const socket = io("http://localhost:4000/");
+const socket = io(SOCKET_IO_SERVER_URL);
+
 export default function ChatWindow() {
   const [pfpUrl, setPfpUrl] = useState(localStorage.getItem("pfpUrl") || "");
   const [username, setUsername] = useState(
@@ -50,8 +52,7 @@ export default function ChatWindow() {
                   : ""
               }
             >
-              <div className="text-sm text-muted-foreground ">
-                {message.user} -{" "}
+              <div className="text-xs text-muted-foreground mb-1">
                 {moment(message.time).format("D.M.YYYY HH:mm")}
               </div>
               <div className="bg-sidebar px-3 py-2 inline-block border rounded-full">
@@ -72,7 +73,11 @@ export default function ChatWindow() {
             if (e.code === "Enter") sendMessage();
           }}
         />
-        <Button variant="icon" onClick={sendMessage} className="absolute right-4">
+        <Button
+          variant="icon"
+          onClick={sendMessage}
+          className="absolute right-4"
+        >
           <SendHorizontal />
         </Button>
       </div>
