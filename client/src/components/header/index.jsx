@@ -65,7 +65,10 @@ export default function Header() {
               <>
                 <DropdownMenu open={open} onOpenChange={setOpen}>
                   <DropdownMenuTrigger asChild>
-                    <Button variant="ghost" className="flex h-full px-2">
+                    <Button
+                      variant="ghost"
+                      className="flex h-full px-2 focus-visible:ring-transparent"
+                    >
                       <Avatar>
                         <AvatarImage src={pfpUrl} />
                         <AvatarFallback>
@@ -105,10 +108,7 @@ export default function Header() {
                             <Button variant="outline">Cancel</Button>
                           </DialogClose>
                           <DialogClose asChild>
-                            <Button
-                              type="submit"
-                              onClick={handleLogOut}
-                            >
+                            <Button type="submit" onClick={handleLogOut}>
                               Log out
                             </Button>
                           </DialogClose>

@@ -128,7 +128,7 @@
   background-color: var(--backgroung-color);
 }
 
-body {
+body, .sora_font {
   font-family: "Sora";
 }
 

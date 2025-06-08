@@ -4,8 +4,10 @@ import { ArrowRight } from "lucide-react";
 import SplitText from "@/components/blocks/TextAnimations/SplitText/SplitText";
 import Logo from "@/assets/img/logo.svg";
 import Header from "@/components/header";
+import { useState } from "react";
 
 export default function Home() {
+  const [isUser, setIsUser] = useState(localStorage.getItem("token"));
   return (
     <>
       <Header />
@@ -38,7 +40,7 @@ export default function Home() {
                 </Button>
 
                 <Button asChild variant="outline" className="w-full sm:w-auto">
-                  <Link to="/login">
+                  <Link to={isUser ? "/app" : "/login"}>
                     Try out
                     <ArrowRight className="size-4" />
                   </Link>

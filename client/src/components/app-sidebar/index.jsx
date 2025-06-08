@@ -6,7 +6,6 @@ import {
   SidebarHeader,
   SidebarMenu,
   SidebarMenuItem,
-  SidebarMenuButton,
 } from "@/components/ui/sidebar";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -16,8 +15,15 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { useState } from "react";
+import { User } from "lucide-react";
 
 export function AppSidebar() {
+  const [pfpUrl, setPfpUrl] = useState(localStorage.getItem("pfpUrl") || "");
+  const [username, setUsername] = useState(
+    localStorage.getItem("username") || "User"
+  );
+  const [email, setEmail] = useState(localStorage.getItem("email") || "Email");
   return (
     <Sidebar collapsible="offcanvas" variant="inset">
       <SidebarHeader>
@@ -48,16 +54,18 @@ export function AppSidebar() {
         <SidebarGroup />
         <SidebarGroup />
       </SidebarContent>
-      <SidebarFooter>
-        <Button className="h-full w-full" variant="ghost">
-          <Avatar className="h-8 w-8 rounded-lg grayscale">
-            <AvatarImage src="" alt="" />
-            <AvatarFallback className="rounded-lg">CN</AvatarFallback>
+      <SidebarFooter className="p-0">
+        <Button className="h-full w-full px-2 m-0 rounded-xl" variant="ghost">
+          <Avatar className="h-8 w-8">
+            <AvatarImage src={pfpUrl} alt={username} />
+            <AvatarFallback className="rounded-lg">
+              <User />
+            </AvatarFallback>
           </Avatar>
           <div className="grid flex-1 text-left text-sm leading-tight">
-            <span className="truncate font-medium">Placeholder</span>
+            <span className="truncate font-medium">{username}</span>
             <span className="text-muted-foreground truncate text-xs">
-              Email
+              {email}
             </span>
           </div>
         </Button>

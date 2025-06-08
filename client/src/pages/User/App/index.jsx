@@ -10,10 +10,10 @@ export default function App() {
     <>
       <SidebarProvider>
         <AppSidebar />
-
         <SidebarInset>
           <div className="p-2">
             <SidebarTrigger />
+
           </div>
         </SidebarInset>
       </SidebarProvider>
