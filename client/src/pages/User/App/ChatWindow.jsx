@@ -19,18 +19,21 @@ export default function ChatWindow() {
   useEffect(() => {
     socket.emit("add-user", username);
 
-    socket.on("chat", (data) => {
+    socket.on("dm", (data) => {
       setUserMessages((userMessages) => [...userMessages, data]);
     });
 
     return () => {
-      socket.off("chat");
+      socket.off("dm");
     };
   }, []);
 
   const sendMessage = () => {
     if (!inputValue) return;
-    socket.emit("chat", inputValue);
+    socket.emit("dm", {
+      receiverId: "",
+      message: inputValue,
+    });
     setInputValue("");
   };
 

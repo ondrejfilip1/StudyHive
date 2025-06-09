@@ -31,25 +31,47 @@ const io = new Server(server, {
 
 app.set("io", io);
 
-const activeUsers = new Set();
+const activeUsers = new Map();
 
 io.on("connection", (socket) => {
   console.log(`New connection from ${socket.handshake.address}`);
 
   socket.on("add-user", (data) => {
     socket.data.user = data;
-    activeUsers.add(socket.data.user);
-    console.log(activeUsers);
-    io.emit("add-user", [...activeUsers]);
+    activeUsers.set(socket.data.user, socket.id);
+    console.log("Active users:", [...activeUsers.values()]);
+    io.emit("add-user", [...activeUsers.keys()]);
   });
 
+  // public chat room (everyone can join)
   socket.on("chat", (data) => {
     const userMessage = {
       user: socket.data.user,
       message: data,
-      time: Date.now()
+      time: Date.now(),
     };
     io.emit("chat", userMessage);
+  });
+
+  socket.on("dm", ({ receiverId, message }) => {
+    const receiverSocketId = activeUsers.get(receiverId);
+
+    if (receiverSocketId) {
+      io.to(receiverSocketId).emit("dm", {
+        senderId: socket.data.user,
+        message,
+        time: Date.now(),
+      });
+
+      // update sender
+      socket.emit("dm", {
+        senderId: socket.data.user,
+        message,
+        time: Date.now(),
+      });
+    } else {
+      console.log(`User ${receiverId} isnt connected`);
+    }
   });
 });
 
