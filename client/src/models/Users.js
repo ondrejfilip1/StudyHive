@@ -54,6 +54,32 @@ export const addUser = async (formData) => {
   };
 };
 
+export const addFriend = async (formData) => {
+  const token = localStorage.getItem("token");
+  const req = await fetch(`http://localhost:3000/users/add-friend/`, {
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    method: "PUT",
+    body: JSON.stringify(formData),
+  });
+  const data = await req.json();
+
+  if (req.status === 200) {
+    return {
+      status: req.status,
+      message: data.message,
+      user: data.payload,
+    };
+  }
+  return {
+    status: req.status,
+    message: data.message,
+  };
+};
+
 export const getFriends = async (formData) => {
   const token = localStorage.getItem("token");
   const req = await fetch(`http://localhost:3000/users/get-friends`, {
@@ -75,14 +101,17 @@ export const getFriends = async (formData) => {
 
 export const getUserProfile = async (id) => {
   const token = localStorage.getItem("token");
-  const req = await fetch(`http://localhost:3000/users/get-user-profile/${id}`, {
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    },
-    method: "GET",
-  });
+  const req = await fetch(
+    `http://localhost:3000/users/get-user-profile/${id}`,
+    {
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      method: "GET",
+    }
+  );
   const data = await req.json();
   return {
     status: req.status,

@@ -32,6 +32,7 @@ const io = new Server(server, {
 app.set("io", io);
 
 const activeUsers = new Map();
+const User = require("./models/users");
 
 io.on("connection", (socket) => {
   console.log(`New connection from ${socket.handshake.address}`);
@@ -53,24 +54,50 @@ io.on("connection", (socket) => {
     io.emit("chat", userMessage);
   });
 
-  socket.on("dm", ({ receiverId, message }) => {
+  socket.on("dm", async ({ receiverId, message }) => {
     const receiverSocketId = activeUsers.get(receiverId);
+    const senderUsername = socket.data.user;
+    try {
+      const sender = await User.findOne({ username: senderUsername });
+      const receiver = await User.findOne({ username: receiverId });
 
-    if (receiverSocketId) {
-      io.to(receiverSocketId).emit("dm", {
-        senderId: socket.data.user,
-        message,
-        time: Date.now(),
-      });
+      // friend check when dming
+      if (
+        sender &&
+        receiver &&
+        sender.friends.find((id) => id.equals(receiver._id))
+      ) {
+        if (receiverSocketId) {
+          io.to(receiverSocketId).emit("dm", {
+            user: senderUsername,
+            message,
+            time: Date.now(),
+          });
 
-      // update sender
+          // update sender
+          socket.emit("dm", {
+            user: senderUsername,
+            message,
+            time: Date.now(),
+          });
+        } else {
+          socket.emit("dm", {
+            user: "Error",
+            message: "User is not connected",
+          });
+          //console.log(`User ${receiverId} isnt connected`);
+        }
+      } else {
+        socket.emit("dm", {
+          user: "Error",
+          message: "This user is not your friend",
+        });
+      }
+    } catch (err) {
       socket.emit("dm", {
-        senderId: socket.data.user,
-        message,
-        time: Date.now(),
+        user: "Error",
+        message: "Error occured",
       });
-    } else {
-      console.log(`User ${receiverId} isnt connected`);
     }
   });
 });
